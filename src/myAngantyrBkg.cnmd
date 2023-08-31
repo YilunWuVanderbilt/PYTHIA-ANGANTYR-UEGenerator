@@ -1,0 +1,41 @@
+! cmnd file
+! This file contains commands to be read in for a Pythia8 run.
+! Angantyr is used to simulate the underlying events in heavy-ion collisions.
+
+! 1) Settings that will be used in a main program.
+Main:numberOfEvents = 20000          ! number of events to generate
+Main:timesAllowErrors = 3          ! abort run after this many flawed events
+
+! 2) Settings related to output in init(), next() and stat().
+
+Next:numberShowInfo = 0            ! print event information n times
+Next:numberShowProcess = 0         ! print process record n times
+Next:numberShowEvent = 0           ! print event record n times
+
+! 3) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 1000822080
+Beams:idB = 1000822080
+Beams:frameType = 1
+Beams:eCM = 5020.                 ! CM energy of collision
+
+
+! 5a) Pick processes and kinematics cuts.
+HardQCD:all = on
+PhaseSpace:pTHatMax = 5.          ! minimum pT of hard process
+PhaseSpace:bias2Selection = on
+PhaseSpace:bias2SelectionPow = 4
+PhaseSpace:bias2SelectionRef = 100.
+
+
+! 6) Other settings. Can be expanded as desired.
+
+!Tune:pp = 14                        ! not using Tune 4Cx
+Random:setSeed = on
+!Random:seed = 1
+
+! 7) Initialize the Angantyr model to fit the total and semi-includive
+!    cross sections in Pythia within some tolerance.
+
+HeavyIon:SigFitErr = {0.02,0.02,0.1,0.05,0.05,0.0,0.1,0.0}
+HeavyIon:SigFitDefPar = {17.24,2.15,0.33,0.0,0.0,0.0,0.0,0.0}
+HeavyIon:SigFitNGen = 20
